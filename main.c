@@ -35,6 +35,10 @@ int main(void){
       continue;
     }
 
+    // Preserve the complete command before parsing it
+    char fullCommand[sizeof(command)];
+    strcpy(fullCommand, input);
+
     // Save the command in history
     if (historyCount < HISTORY_LIMIT){
       strcpy(history[historyCount], input);
@@ -168,11 +172,14 @@ int main(void){
       }
     }
 
-    // Unknown command for now
+    // Execute external Windows commands
     else{
-      printf("Unknown command: %s\n", input);
-    }
-  }
+      int result = system(fullCommand);
+
+      if (result == -1){
+        printf("Error: Unable to start Windows command processor.\n");
+      }
+    }  }
 
   return 0;
 }
