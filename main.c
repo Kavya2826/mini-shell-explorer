@@ -179,7 +179,8 @@ int main(void){
       if (result == -1){
         printf("Error: Unable to start Windows command processor.\n");
       }
-    }  }
+    }
+  }
 
   return 0;
 }
